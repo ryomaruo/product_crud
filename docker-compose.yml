@@ -1,0 +1,43 @@
+version: '2'
+services:
+    web:
+        container_name: p_c_web
+        build:
+            context: ./
+            dockerfile: web.docker
+        volumes:
+            - ./www/product_crud:/var/www/product_crud
+        ports:
+            - "8080:80"
+        links:
+            - app
+    app:
+        container_name: p_c_app
+        build:
+            context: ./
+            dockerfile: app.docker
+        volumes:
+            - ./www/product_crud:/var/www/product_crud
+        links:
+            - mysql
+            - redis
+    mysql:
+        container_name: p_c_mysql
+        restart: always
+        image: mysql:latest
+        volumes:
+            - ./mysql:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+        ports:
+            - "3306:3306"
+    redis:
+        container_name: p_c_redis
+        restart: always
+        image: redis:latest
+        volumes:
+            - ./redis:/data
+        ports:
+            - "6379:6379"
+        command: redis-server --appendonly yes

@@ -1,0 +1,44 @@
+FROM php:7-fpm
+
+RUN apt-get update && \
+    apt-get install -y libmcrypt-dev \
+    mysql-client \
+    wget \
+    ruby \
+    git \
+    bzip2 \
+    libjpeg-dev \
+    libpng-dev \
+    libncurses5-dev \
+    libaio-dev \
+    libfreetype6-dev \
+    libmagickwand-dev \
+    zip \
+    unzip \
+    vim \
+    locales && \
+    locale-gen ja_JP.UTF-8 && \
+    localedef -f UTF-8 -i ja_JP ja_JP && \
+    docker-php-source extract && \
+    pecl install redis && \
+    pecl install xdebug && \
+    pecl install imagick && \
+    docker-php-ext-enable redis xdebug imagick && \
+    docker-php-ext-install pdo_mysql && \
+    docker-php-ext-install mysqli && \
+    docker-php-ext-install opcache && \
+    docker-php-ext-configure gd \
+        --with-jpeg-dir=/usr/local \
+        --with-freetype-dir=/usr/local \
+        --with-png-dir=/usr/local \
+        --enable-gd-native-ttf \
+        --enable-gd-jis-conv && \
+    docker-php-ext-install gd && \
+    docker-php-ext-install zip && \
+    docker-php-source delete && \
+    curl -sS https://getcomposer.org/installer | php && \
+    mv composer.phar /usr/local/bin/composer && \
+    useradd -m -s /bin/bash -u 1000 doubleo && \
+    sed -i 's/user\ \=\ www-data/user\ \=\ doubleo/g' /usr/local/etc/php-fpm.d/www.conf && \
+    sed -i 's/group\ \=\ www-data/group\ \=\ doubleo/g' /usr/local/etc/php-fpm.d/www.conf
+WORKDIR /var/www
