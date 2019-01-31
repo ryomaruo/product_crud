@@ -6,7 +6,7 @@ const _products = [
     'price': 12345,
     'stock': 3,
     'discontinued': 0,
-    'discription': 'this is discription.this is discription.this is discription.this is discription.',
+    'description': 'this is description.this is description.this is description.this is description.',
     'image_url': 'https://i.gyazo.com/af0f2bff4b6b19f3f274947c543eb27c.jpg',
   },
   {
@@ -16,7 +16,7 @@ const _products = [
     'price': 6789,
     'stock': 2,
     'discontinued': 0,
-    'discription': 'this is discription.this is discription.this is discription.this is discription.',
+    'description': 'this is description.this is description.this is description.this is description.',
     'image_url': 'https://i.gyazo.com/.jpg',
   },
   {
@@ -26,7 +26,7 @@ const _products = [
     'price': 123456789,
     'stock': 1,
     'discontinued': 0,
-    'discription': 'this is discription.this is discription.this is discription.this is discription.',
+    'description': 'this is description.this is description.this is description.this is description.',
     'image_url': 'https://i.gyazo.com/af0f2bff4b6b19f3f274947c543eb27c.jpg',
   }
 ]

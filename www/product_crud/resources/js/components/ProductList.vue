@@ -4,8 +4,7 @@
       v-for="product, i in products"
       :key="product.id"
       class="col-lg-6 col-md-12 col-sm-12">
-      <div
-        class="product-box mx-auto">
+      <div class="product-box mx-auto">
         <div class="image-area">
           <img :src="product.image_url" @error="imageUrlAlt(i)" />
         </div>
@@ -19,13 +18,10 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   computed: {
-    ...mapState("products", ["products"]),
-    ...mapGetters({
-      doneCount: 'doneTodosCount'
-    })
+    ...mapState("products", ["products"])
   },
   methods: mapActions('products', [
     'initProducts',

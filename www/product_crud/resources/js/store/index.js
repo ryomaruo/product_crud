@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import products from './modules/products'
+import modals from './modules/modals'
 import BootstrapVue from 'bootstrap-vue'
 
 Vue.use(Vuex)
@@ -10,7 +11,8 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
   modules: {
-    products
+    products,
+    modals
   },
   strict: debug
 })
