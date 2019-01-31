@@ -7,12 +7,12 @@
         </button>
     </div>
       <div>
-        <button class="btn btn-outline-info">
+        <button class="btn btn-outline-info disabled">
             編集
         </button>
     </div>
       <div>
-        <button class="btn btn-outline-danger">
+        <button class="btn btn-outline-danger disabled">
             削除
         </button>
     </div>
@@ -38,6 +38,7 @@ export default {
       margin: 50px 0;
       .btn {
         font-size: 0.8rem;
+        box-shadow: 0 0 10px #fff;
       }
     }
   }

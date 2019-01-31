@@ -128,18 +128,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])("products", ["products"]), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     doneCount: 'doneTodosCount'
   })),
-  methods: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('products', ['initProducts']),
+  methods: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('products', ['initProducts', 'imageUrlAlt']),
   created: function created() {
     this.initProducts();
   },
-  mounted: function mounted() {
-    console.log(this);
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -16263,7 +16265,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".product-box[data-v-438ffe92] {\n  width: 350px;\n  height: 200px;\n  margin: 40px 0;\n  border: solid 1px #fff;\n}", ""]);
+exports.push([module.i, ".product-box[data-v-438ffe92] {\n  width: 350px;\n  height: 200px;\n  margin: 40px 0;\n  border: solid 1px #fff;\n  box-shadow: 0 0 10px #fff;\n  position: relative;\n}\n.product-box .image-area[data-v-438ffe92] {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.product-box img[data-v-438ffe92] {\n  width: 100%;\n  height: 100%;\n}\n.product-box .info-area[data-v-438ffe92] {\n  padding: 5px;\n  position: absolute;\n  bottom: 0;\n  right: 0;\n}", ""]);
 
 // exports
 
@@ -16301,7 +16303,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#sidebar[data-v-223abea1] {\n  height: 100%;\n  padding: 100px 0;\n  position: fixed;\n}\n#sidebar div[data-v-223abea1] {\n  margin: 50px 0;\n}\n#sidebar div .btn[data-v-223abea1] {\n  font-size: 0.8rem;\n}", ""]);
+exports.push([module.i, "#sidebar[data-v-223abea1] {\n  height: 100%;\n  padding: 100px 0;\n  position: fixed;\n}\n#sidebar div[data-v-223abea1] {\n  margin: 50px 0;\n}\n#sidebar div .btn[data-v-223abea1] {\n  font-size: 0.8rem;\n  box-shadow: 0 0 10px #fff;\n}", ""]);
 
 // exports
 
@@ -22691,27 +22693,35 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "row" },
-    _vm._l(_vm.products, function(product) {
+    _vm._l(_vm.products, function(product, i) {
       return _c(
         "div",
         { key: product.id, staticClass: "col-lg-6 col-md-12 col-sm-12" },
         [
-          _c(
-            "div",
-            {
-              staticClass: "product-box mx-auto",
-              style: { backgroundImage: "url('" + product.image_url + "')" }
-            },
-            [
+          _c("div", { staticClass: "product-box mx-auto" }, [
+            _c("div", { staticClass: "image-area" }, [
+              _c("img", {
+                attrs: { src: product.image_url },
+                on: {
+                  error: function($event) {
+                    _vm.imageUrlAlt(i)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "info-area" }, [
               _vm._v(
                 "\n      " +
-                  _vm._s(product.name) +
+                  _vm._s(i) +
                   "\n      " +
+                  _vm._s(product.name) +
+                  " " +
                   _vm._s(product.price) +
-                  "\n    "
+                  "Yen\n      "
               )
-            ]
-          )
+            ])
+          ])
         ]
       )
     }),
@@ -22801,13 +22811,13 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("div", [
-          _c("button", { staticClass: "btn btn-outline-info" }, [
+          _c("button", { staticClass: "btn btn-outline-info disabled" }, [
             _vm._v("\n          編集\n      ")
           ])
         ]),
         _vm._v(" "),
         _c("div", [
-          _c("button", { staticClass: "btn btn-outline-danger" }, [
+          _c("button", { staticClass: "btn btn-outline-danger disabled" }, [
             _vm._v("\n          削除\n      ")
           ])
         ])
@@ -37718,7 +37728,7 @@ var _products = [{
   'stock': 3,
   'discontinued': 0,
   'discription': 'this is discription.this is discription.this is discription.this is discription.',
-  'image_url': 'https://newevolutiondesigns.com/images/freebies/cool-wallpaper-8.jpg'
+  'image_url': 'https://i.gyazo.com/af0f2bff4b6b19f3f274947c543eb27c.jpg'
 }, {
   'id': 2,
   'name': 'iPhone 5（台湾製）',
@@ -37727,7 +37737,7 @@ var _products = [{
   'stock': 2,
   'discontinued': 0,
   'discription': 'this is discription.this is discription.this is discription.this is discription.',
-  'image_url': 'https://newevolutiondesigns.com/images/freebies/cool-wallpaper-8.jpg'
+  'image_url': 'https://i.gyazo.com/.jpg'
 }, {
   'id': 3,
   'name': 'iPhone XR（台湾製）',
@@ -37736,7 +37746,7 @@ var _products = [{
   'stock': 1,
   'discontinued': 0,
   'discription': 'this is discription.this is discription.this is discription.this is discription.',
-  'image_url': 'https://newevolutiondesigns.com/images/freebies/cool-wallpaper-8.jpg'
+  'image_url': 'https://i.gyazo.com/af0f2bff4b6b19f3f274947c543eb27c.jpg'
 }];
 
 var fetchProducts =
@@ -38361,13 +38371,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_products__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/products */ "./resources/js/store/modules/products.js");
-/* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/es/index.js");
+/* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/es/index.js");
 
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
 var debug = "development" !== 'production';
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
@@ -38399,24 +38409,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  // initial state
 
 var state = {
-  products: [] // getters
+  products: [],
+  altImage: 'https://i.gyazo.com/0ba231479a5db2b2664fc81e184f2591.png' // getters
 
 };
 var getters = {
-  doneTodos: function doneTodos(state) {
-    return state.todos.filter(function (todo) {
-      return todo.done;
+  discontinuedProducts: function discontinuedProducts(state) {
+    return state.products.filter(function (product) {
+      return product.discontinued;
     });
-  },
-  doneTodosCount: function doneTodosCount(state, getters) {
-    return getters.doneTodos.length;
-  },
-  getTodoById: function getTodoById(state) {
-    return function (id) {
-      return state.todos.find(function (todo) {
-        return todo.id === id;
-      });
-    };
   } // actions
 
 };
@@ -38436,7 +38437,9 @@ var actions = {
 
             case 3:
               products = _context.sent;
-              commit('setProducts', products);
+              commit('setProducts', {
+                products: products
+              });
 
             case 5:
             case "end":
@@ -38451,12 +38454,23 @@ var actions = {
     }
 
     return initProducts;
-  }()
-}; // mutations
+  }(),
+  imageUrlAlt: function imageUrlAlt(_ref2, i) {
+    var commit = _ref2.commit,
+        dispatch = _ref2.dispatch,
+        state = _ref2.state;
+    commit('updateInvalidImg', {
+      index: i
+    });
+  } // mutations
 
+};
 var mutations = {
-  setProducts: function setProducts(state, products) {
-    state.products = products;
+  setProducts: function setProducts(state, p) {
+    state.products = p.products;
+  },
+  updateInvalidImg: function updateInvalidImg(state, p) {
+    state.products[p.index].image_url = state.altImage;
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({

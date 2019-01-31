@@ -7,7 +7,7 @@ const _products = [
     'stock': 3,
     'discontinued': 0,
     'discription': 'this is discription.this is discription.this is discription.this is discription.',
-    'image_url': 'https://newevolutiondesigns.com/images/freebies/cool-wallpaper-8.jpg',
+    'image_url': 'https://i.gyazo.com/af0f2bff4b6b19f3f274947c543eb27c.jpg',
   },
   {
     'id': 2,
@@ -17,7 +17,7 @@ const _products = [
     'stock': 2,
     'discontinued': 0,
     'discription': 'this is discription.this is discription.this is discription.this is discription.',
-    'image_url': 'https://newevolutiondesigns.com/images/freebies/cool-wallpaper-8.jpg',
+    'image_url': 'https://i.gyazo.com/.jpg',
   },
   {
     'id': 3,
@@ -27,7 +27,7 @@ const _products = [
     'stock': 1,
     'discontinued': 0,
     'discription': 'this is discription.this is discription.this is discription.this is discription.',
-    'image_url': 'https://newevolutiondesigns.com/images/freebies/cool-wallpaper-8.jpg',
+    'image_url': 'https://i.gyazo.com/af0f2bff4b6b19f3f274947c543eb27c.jpg',
   }
 ]
 

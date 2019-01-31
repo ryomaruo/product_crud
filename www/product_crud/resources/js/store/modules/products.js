@@ -2,21 +2,14 @@ import shop from '../../api/shop'
 
 // initial state
 const state = {
-  products: []
+  products: [],
+  altImage: 'https://i.gyazo.com/0ba231479a5db2b2664fc81e184f2591.png'
 }
 
 // getters
 const getters = {
-  doneTodos: state => {
-    return state.todos.filter(todo => todo.done)
-  },
-
-  doneTodosCount: (state, getters) => {
-    return getters.doneTodos.length
-  },
-
-  getTodoById: (state) => (id) => {
-    return state.todos.find(todo => todo.id === id)
+  discontinuedProducts: state => {
+    return state.products.filter(product => product.discontinued)
   }
 }
 
@@ -24,14 +17,24 @@ const getters = {
 const actions = {
   async initProducts ({ commit, dispatch, state }) {
     const products = await shop.fetchProducts()
-    commit('setProducts', products)
+    commit('setProducts', {
+      products: products
+    })
+  },
+  imageUrlAlt: ({ commit, dispatch, state }, i) => {
+    commit('updateInvalidImg', {
+      index: i
+    })
   }
 }
 
 // mutations
 const mutations = {
-  setProducts (state, products) {
-    state.products = products
+  setProducts: (state, p) => {
+    state.products = p.products
+  },
+  updateInvalidImg:  (state, p) => {
+    state.products[p.index].image_url = state.altImage
   }
 }
 
