@@ -1,6 +1,12 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
+import App from './components/App.vue'
+import router from './router'
+import store from './store'
 
 new Vue({
   el: '#app',
-  template: '<div>Hello World</div>'
+  render: h=>h(App),
+  store,
+  router
 })
