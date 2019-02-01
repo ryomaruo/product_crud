@@ -6,15 +6,27 @@
         :key="product.id"
         class="col-lg-6 col-md-12 col-sm-12">
         <div class="product-box mx-auto">
+          <div class="btn-area">
+            <b-btn
+              v-b-modal.basicModal
+              variant="outline-danger"
+              @click="onClickDelete(i)">
+              <font-awesome-icon icon="times" />
+            </b-btn>
+<!--            <button
+              class="btn btn-outline-danger"
+              @click="basicModalShow">
+            </button> -->
+          </div>
           <div class="image-area">
             <img :src="product.image_url" @error="imageUrlAlt(i)" />
           </div>
           <div class="info-area">
-          {{ i }}
           {{ product.name }} {{ product.price }}Yen
           </div>
         </div>
       </div>
+      <basic-modal></basic-modal>
     </div>
     <div v-else class="col-12 text-center no-item">
       No Items
@@ -25,7 +37,12 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
+import BasicModal from './BasicModal.vue'
+
 export default {
+  components: {
+    BasicModal
+  },
   computed: {
     ...mapState("products", ["products"]),
     ...mapGetters("products", ['isExistProducts'])
@@ -34,7 +51,8 @@ export default {
     ...mapActions('products', [
       'initProducts',
       'imageUrlAlt'
-    ])
+    ]),
+    ...mapActions('modal', ['onClickDelete']),
   },
   created () {
     this.initProducts()
@@ -62,6 +80,16 @@ export default {
     img {
       width: 100%;
       height: 100%;
+    }
+    .btn-area {
+      padding: 5px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+      .btn {
+        border-radius: 20px !important;
+      }
     }
     .info-area {
       padding: 5px;

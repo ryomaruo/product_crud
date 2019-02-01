@@ -21,9 +21,6 @@ const state = {
 // getters
 const getters = {
   isExistProducts (state) {
-    console.log('state.products.length');
-    console.log(state.products.length);
-    
     return state.products.length > 0;
   },
   discontinuedProducts (state) {
@@ -33,10 +30,19 @@ const getters = {
 
 // actions
 const actions = {
-  async initProducts ({ commit }) {
+  // TODO: isLoading追加
+  async initProducts({ commit }) {
     const products = await shop.fetchProducts()
     commit('setProducts', {
       products: products
+    })
+  },
+  async deleteProduct({ commit , state}, index) {
+    // TODO: isLoading追加
+    const id = state.products[index].id
+    await shop.deleteProducts()
+    commit('deleteProduct', {
+      index: index
     })
   },
   imageUrlAlt: ({ commit }, i) => {
@@ -61,6 +67,9 @@ const mutations = {
   },
   createProduct: (state, p) => {
     state.products.push(p.newProduct)
+  },
+  deleteProduct: (state, p) => {
+    state.products.splice(p.index, 1)
   }
 }
 
