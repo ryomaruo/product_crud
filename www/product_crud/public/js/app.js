@@ -49274,8 +49274,7 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-    var res, products, _error$response, status, statusText;
-
+    var res, products;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -49292,11 +49291,9 @@ function () {
           case 8:
             _context.prev = 8;
             _context.t0 = _context["catch"](0);
-            _error$response = _context.t0.response, status = _error$response.status, statusText = _error$response.statusText;
-            console.log("Error! HTTP Status: ".concat(status, " ").concat(statusText));
             return _context.abrupt("return", []);
 
-          case 13:
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -49314,24 +49311,34 @@ var deleteProducts =
 function () {
   var _ref2 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(id, products) {
+    var res;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            // TODO: delete api実装
-            console.log('api deleteProducts');
-            return _context2.abrupt("return", true);
+            _context2.prev = 0;
+            _context2.next = 3;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete('http://localhost:8080/api/products/' + id);
 
-          case 2:
+          case 3:
+            res = _context2.sent;
+            return _context2.abrupt("return", res.data);
+
+          case 7:
+            _context2.prev = 7;
+            _context2.t0 = _context2["catch"](0);
+            return _context2.abrupt("return", products);
+
+          case 10:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, this);
+    }, _callee2, this, [[0, 7]]);
   }));
 
-  return function deleteProducts() {
+  return function deleteProducts(_x, _x2) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -50180,7 +50187,7 @@ var actions = {
     var _deleteProduct = _asyncToGenerator(
     /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref2, index) {
-      var commit, state, id;
+      var commit, state, id, products;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -50189,14 +50196,15 @@ var actions = {
               // TODO: isLoading追加
               id = state.products[index].id;
               _context2.next = 4;
-              return _api_shop__WEBPACK_IMPORTED_MODULE_1__["default"].deleteProducts();
+              return _api_shop__WEBPACK_IMPORTED_MODULE_1__["default"].deleteProducts(id, state.products);
 
             case 4:
-              commit('deleteProduct', {
-                index: index
+              products = _context2.sent;
+              commit('setProducts', {
+                products: products
               });
 
-            case 5:
+            case 6:
             case "end":
               return _context2.stop();
           }
@@ -50233,10 +50241,10 @@ var mutations = {
   },
   createProduct: function createProduct(state, p) {
     state.products.push(p.newProduct);
-  },
-  deleteProduct: function deleteProduct(state, p) {
-    state.products.splice(p.index, 1);
-  }
+  } //  deleteProduct: (state, p) => {
+  //    state.products.splice(p.index, 1)
+  //  }
+
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,

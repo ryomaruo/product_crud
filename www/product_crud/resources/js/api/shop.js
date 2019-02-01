@@ -6,19 +6,28 @@ const fetchProducts = async () => {
     const products = res.data
     return products
   } catch (error) {
-    const {
-      status,
-      statusText
-    } = error.response;
-    console.log(`Error! HTTP Status: ${status} ${statusText}`);
+//    const {
+//      status,
+//      statusText
+//    } = error.response;
+//    console.log(`Error! HTTP Status: ${status} ${statusText}`);
     return [];
   }
 };
 
-const deleteProducts = async () => {
-  // TODO: delete api実装
-  console.log('api deleteProducts');
-  return true
+const deleteProducts = async (id, products) => {
+  try {
+    const res = await axios.delete('http://localhost:8080/api/products/' + id)
+    
+    return res.data;
+  } catch (error) {
+ //   const {
+ //     status,
+ //     statusText
+ //   } = error.response;
+ //   console.log(`Error! HTTP Status: ${status} ${statusText}`);
+    return products;
+  }
 }
 
 

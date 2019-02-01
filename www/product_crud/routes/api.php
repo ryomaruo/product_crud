@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => ['api']], function(){
-  Route::resource('products', 'Api\ProductController', ['except' => ['create', 'edit']]);
+Route::group([
+  'middleware' => ['api', 'cors'],
+], function(){
+  Route::resource('products', 'Api\ProductController');
 });

@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::All();
         return $products;
     }
 
@@ -28,11 +28,12 @@ class ProductController extends Controller
     {
       $product = new Product;
       $product->name = $request->name;
-      $product->modelNumber = $request->modelNumber;
+      $product->model_number = $request->modelNumber;
       $product->price = $request->price;
       $product->stock = $request->stock;
       $product->discontinued = $request->discontinued;
       $product->description = $request->description;
+      $product->image_url = $request->image_url;
       $product->save();
       return redirect('api/products');
     }
@@ -60,11 +61,12 @@ class ProductController extends Controller
     {
       $product = Product::find($id);
       $product->name = $request->name;
-      $product->modelNumber = $request->modelNumber;
+      $product->model_number = $request->modelNumber;
       $product->price = $request->price;
       $product->stock = $request->stock;
       $product->discontinued = $request->discontinued;
       $product->description = $request->description;
+      $product->image_url = $request->image_url;
       $product->save();
       return redirect("api/products/".$id);
     }
@@ -78,7 +80,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
       $product = Product::find($id);
-      $product->deleted_at = date('Y-m-d H:i:s');
+      $product->delete();
       return redirect('api/products');
     }
 }

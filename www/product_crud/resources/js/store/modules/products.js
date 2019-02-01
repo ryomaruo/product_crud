@@ -40,9 +40,9 @@ const actions = {
   async deleteProduct({ commit , state}, index) {
     // TODO: isLoading追加
     const id = state.products[index].id
-    await shop.deleteProducts()
-    commit('deleteProduct', {
-      index: index
+    const products = await shop.deleteProducts(id, state.products)
+    commit('setProducts', {
+      products: products
     })
   },
   imageUrlAlt: ({ commit }, i) => {
@@ -68,9 +68,9 @@ const mutations = {
   createProduct: (state, p) => {
     state.products.push(p.newProduct)
   },
-  deleteProduct: (state, p) => {
-    state.products.splice(p.index, 1)
-  }
+//  deleteProduct: (state, p) => {
+//    state.products.splice(p.index, 1)
+//  }
 }
 
 export default {
