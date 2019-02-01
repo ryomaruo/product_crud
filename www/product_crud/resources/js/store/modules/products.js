@@ -20,7 +20,13 @@ const state = {
 
 // getters
 const getters = {
-  discontinuedProducts: state => {
+  isExistProducts (state) {
+    console.log('state.products.length');
+    console.log(state.products.length);
+    
+    return state.products.length > 0;
+  },
+  discontinuedProducts (state) {
     return state.products.filter(product => product.discontinued)
   }
 }
@@ -39,9 +45,6 @@ const actions = {
     })
   },
   createProduct: ({ commit }, newProduct) => {
-    console.log('action newProduct');
-    console.log(newProduct);
-    
     commit('createProduct', {
       newProduct: newProduct
     })
@@ -58,9 +61,6 @@ const mutations = {
   },
   createProduct: (state, p) => {
     state.products.push(p.newProduct)
-    console.log('state');
-    console.log(state);
-    
   }
 }
 

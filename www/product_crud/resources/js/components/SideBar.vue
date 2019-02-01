@@ -68,7 +68,7 @@
 <style lang="scss" scoped>
   #sidebar {
     height: 100%;
-    padding: 100px 0;
+    padding: 40px 0;
     position: fixed;
     div {
       margin: 50px 0;

@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const _products = [
   {
     'id': 1,
@@ -32,9 +34,18 @@ const _products = [
 ]
 
 const fetchProducts = async () => {
-//  const res = await axios.get('url', {});
-//  return res.data
-  return _products;
+  try {
+    const res = await axios.get('http://localhost:8080/api/products')
+    const products = res.data
+    return products
+  } catch (error) {
+    const {
+      status,
+      statusText
+    } = error.response;
+    console.log(`Error! HTTP Status: ${status} ${statusText}`);
+    return [];
+  }
 };
 
 
