@@ -1,23 +1,21 @@
 <template>
-  <div>
-    <div class="create-product">
-      {{ product }}
-    </div>
+  <div class="text-center">
+    <legend>商品編集</legend>
+    <form class="form-horizontal">
+      <fieldset>
+        <ProductForm page="edit"></ProductForm>
+      </fieldset>
+    </form>
   </div>
 </template>
 
 <script>
-  import { mapState, mapActions, mapMutations } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
+  import ProductForm from './ProductForm.vue'
 
   export default {
-    computed: {
-      ...mapState('product', ['product', 'maxLength'])
-    },
-    methods: {
-      ...mapActions('product', ['initEditingProduct'])
-    },
-    created() {
-      this.initEditingProduct(this.$route.params.id)
+    components: {
+      ProductForm
     }
   }
 </script>

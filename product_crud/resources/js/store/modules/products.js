@@ -49,6 +49,7 @@ const actions = {
 const mutations = {
   setProducts: (state, p) => {
     state.products = p.products
+    
   },
   addProduct: (state, p) => {
     state.products.push(p.product)

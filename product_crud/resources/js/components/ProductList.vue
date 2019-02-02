@@ -14,19 +14,15 @@
               <b-btn
                 v-b-modal.basicModal
                 variant="outline-danger"
-                @click="onClickDelete(i)">
+                @click.stop="onClickDelete(i)">
                 <font-awesome-icon icon="times" />
               </b-btn>
-  <!--            <button
-                class="btn btn-outline-danger"
-                @click="basicModalShow">
-              </button> -->
             </div>
             <img
               :src="product.image_url"
               @error="imageUrlAlt(i)" />
             <div class="info-area">
-            {{ product.name }} {{ product.price }}Yen
+              <p>{{ product.name }} : {{ product.price }}円</p>
             </div>
           </router-link>
         </div>
@@ -70,7 +66,7 @@ export default {
 <style lang="scss" scoped>
   .product-box {
     width: 350px;
-    height: 200px;
+    height: 250px;
     margin: 40px 0;
     border: solid 1px #fff;
     box-shadow: 0 0 10px #fff;
@@ -103,6 +99,8 @@ export default {
     }
     .info-area {
       padding: 5px;
+      background: #000;
+      opacity: 0.6;
       position: absolute;
       bottom: 0;
       right: 0;

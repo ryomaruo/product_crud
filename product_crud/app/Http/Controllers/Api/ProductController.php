@@ -28,7 +28,7 @@ class ProductController extends Controller
     {
       $product = new Product;
       $product->name = $request->name;
-      $product->model_number = $request->modelNumber;
+      $product->model_number = $request->model_number;
       $product->price = $request->price;
       $product->stock = $request->stock;
       $product->discontinued = $request->discontinued;
@@ -61,14 +61,14 @@ class ProductController extends Controller
     {
       $product = Product::find($id);
       $product->name = $request->name;
-      $product->model_number = $request->modelNumber;
+      $product->model_number = $request->model_number;
       $product->price = $request->price;
       $product->stock = $request->stock;
       $product->discontinued = $request->discontinued;
       $product->description = $request->description;
       $product->image_url = $request->image_url;
       $product->save();
-      return redirect("api/products/".$id);
+      return redirect("api/products");
     }
 
     /**
