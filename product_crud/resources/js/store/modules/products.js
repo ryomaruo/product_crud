@@ -3,18 +3,6 @@ import shop from '../../api/shop'
 // initial state
 const state = {
   products: [],
-  newProduct: {
-    name: '',
-    modelNumber: '',
-    price: 0,
-    stock: 0,
-    discontinued: 0,
-    description: ''
-  },
-  maxLength: {
-    name: 32,
-    modelNumber: 50
-  },
   altImage: 'https://i.gyazo.com/0ba231479a5db2b2664fc81e184f2591.png'
 }
 
@@ -37,7 +25,12 @@ const actions = {
       products: products
     })
   },
-  async deleteProduct({ commit , state}, index) {
+  addProduct: ({ commit , state , rootState }) => {
+    commit('addProduct', {
+      product: rootState.product.product
+    })
+  },
+  async deleteProduct({ commit , state }, index) {
     // TODO: isLoading追加
     const id = state.products[index].id
     const products = await shop.deleteProducts(id, state.products)
@@ -50,11 +43,6 @@ const actions = {
       index: i
     })
   },
-  createProduct: ({ commit }, newProduct) => {
-    commit('createProduct', {
-      newProduct: newProduct
-    })
-  }
 }
 
 // mutations
@@ -62,15 +50,12 @@ const mutations = {
   setProducts: (state, p) => {
     state.products = p.products
   },
+  addProduct: (state, p) => {
+    state.products.push(p.product)
+  },
   updateInvalidImg:  (state, p) => {
     state.products[p.index].image_url = state.altImage
-  },
-  createProduct: (state, p) => {
-    state.products.push(p.newProduct)
-  },
-//  deleteProduct: (state, p) => {
-//    state.products.splice(p.index, 1)
-//  }
+  }
 }
 
 export default {

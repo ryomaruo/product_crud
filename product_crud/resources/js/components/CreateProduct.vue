@@ -6,27 +6,31 @@
         <div class="create-product">
           <div :class="errorClassObj('name')" class="form-group">
             <label for="name" class="col-md-2 control-label text-left">商品名</label>
-            <input v-model="product.name" id="name"/>
+            <input v-model="current.name" id="name"/>
           </div>
           <div :class="errorClassObj('modelNumber')" class="form-group">
             <label for="modelNumber" class="col-md-2 control-label text-left">型番</label>
-            <input v-model="product.modelNumber" id="modelNumber"/>
+            <input v-model="current.modelNumber" id="modelNumber"/>
           </div>
           <div :class="errorClassObj('price')" class="form-group">
             <label for="price" class="col-md-2 control-label text-left">販売価格</label>
-            <input v-model="product.price" id="price"/>
+            <input v-model="current.price" id="price"/>
           </div>
           <div :class="errorClassObj('stock')" class="form-group">
             <label for="stock" class="col-md-2 control-label text-left">在庫数</label>
-            <input v-model="product.stock" id="stock"/>
+            <input v-model="current.stock" id="stock"/>
           </div>
           <div :class="errorClassObj('discontinued')" class="form-group">
             <label for="discontinued" class="col-md-2 control-label text-left">販売状態</label>
-            <input v-model="product.discontinued" id="discontinued"/>
+            <input v-model="current.discontinued" id="discontinued"/>
           </div>
           <div :class="errorClassObj('description')" class="form-group">
             <label for="description" class="col-md-2 control-label text-left">商品説明</label>
-            <input v-model="product.description" id="description"/>
+            <input v-model="current.description" id="description"/>
+          </div>
+          <div :class="errorClassObj('description')" class="form-group">
+            <label for="description" class="col-md-2 control-label text-left">商品説明</label>
+            <input v-model="current.description" id="description"/>
           </div>
           <div class="text-center">
             <input
@@ -42,18 +46,12 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
+  import { mapState, mapActions, mapMutations } from 'vuex'
 
   export default {
-    data () {
+    data() {
       return {
-        product: {}
-      }
-    },
-    methods: {
-      ...mapActions('products', ['createProduct']),
-      initProduct() {
-        this.product = {
+        current: {
           name: '',
           modelNumber: '',
           price: 0,
@@ -61,22 +59,12 @@
           discontinued: 0,
           description: ''
         }
-      },
-      onSubmit() {
-        this.createProduct(this.product)
-        this.initProduct()
-        return false;
-      },
-      errorClassObj(key) {
-        return {
-          'has-error': (this.validation[key] == false)
-        }
       }
     },
     computed: {
-      ...mapState('products', ['maxLength']),
+      ...mapState('product', ['product', 'maxLength']),
       validation() {
-        const product = this.product
+        const product = this.current
         
         return {
           name  : (!!product.name && product.name.length <= this.maxLength.name),
@@ -95,8 +83,20 @@
         })
       }
     },
-    created() {
-      this.initProduct()
+    methods: {
+      ...mapMutations('product', ['initProduct']),
+      ...mapActions('product', ['createProduct']),
+      ...mapActions('products', ['addProduct']),
+      onSubmit() {
+        this.createProduct(this.current)
+        this.addProduct()
+        return false;
+      },
+      errorClassObj(key) {
+        return {
+          'has-error': (this.validation[key] == false)
+        }
+      }
     }
   }
 </script>

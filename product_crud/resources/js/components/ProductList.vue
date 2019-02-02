@@ -6,29 +6,29 @@
         :key="product.id"
         class="col-lg-6 col-md-12 col-sm-12">
         <div class="product-box mx-auto">
-          <div class="btn-area">
-            <b-btn
-              v-b-modal.basicModal
-              variant="outline-danger"
-              @click="onClickDelete(i)">
-              <font-awesome-icon icon="times" />
-            </b-btn>
-<!--            <button
-              class="btn btn-outline-danger"
-              @click="basicModalShow">
-            </button> -->
-          </div>
           <router-link
             tag="div"
             class="image-area"
-            :to="{ path: '/products/edit', params: { id: product.id }}">
+            :to="{ path: '/products/edit/' + product.id }">
+            <div class="btn-area">
+              <b-btn
+                v-b-modal.basicModal
+                variant="outline-danger"
+                @click="onClickDelete(i)">
+                <font-awesome-icon icon="times" />
+              </b-btn>
+  <!--            <button
+                class="btn btn-outline-danger"
+                @click="basicModalShow">
+              </button> -->
+            </div>
             <img
               :src="product.image_url"
               @error="imageUrlAlt(i)" />
+            <div class="info-area">
+            {{ product.name }} {{ product.price }}Yen
+            </div>
           </router-link>
-          <div class="info-area">
-          {{ product.name }} {{ product.price }}Yen
-          </div>
         </div>
       </div>
       <basic-modal></basic-modal>
@@ -82,18 +82,23 @@ export default {
       top: 0;
       left: 0;
     }
-    img {
-      width: 100%;
-      height: 100%;
-    }
-    .btn-area {
-      padding: 5px;
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 1;
-      .btn {
-        border-radius: 20px !important;
+    .image-area {
+      &:hover {
+        cursor: pointer;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+      }
+      .btn-area {
+        padding: 5px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        .btn {
+          border-radius: 20px !important;
+        }
       }
     }
     .info-area {
