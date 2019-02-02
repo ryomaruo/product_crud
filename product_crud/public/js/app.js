@@ -11377,7 +11377,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'has-error': this.validation[key] == false
       };
     }
-  })
+  }),
+  created: function created() {
+    this.initProduct();
+  }
 });
 
 /***/ }),
@@ -11406,9 +11409,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('products', ['editingProduct'])),
-  methods: {},
-  created: function created() {}
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('product', ['product', 'maxLength'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('product', ['initEditingProduct'])),
+  created: function created() {
+    this.initEditingProduct(this.$route.params.id);
+  }
 });
 
 /***/ }),
@@ -34190,7 +34195,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "create-product" }, [
-      _vm._v("\n    " + _vm._s(_vm.$route.params) + "\n  ")
+      _vm._v("\n    " + _vm._s(_vm.product) + "\n  ")
     ])
   ])
 }
@@ -50234,7 +50239,7 @@ var actions = {
         rootState = _ref2.rootState;
     commit('setProduct', {
       product: rootState.products.products.find(function (item) {
-        return item.id === id;
+        return item.id == id;
       })
     });
   }
@@ -50252,6 +50257,8 @@ var mutations = {
   },
   setProduct: function setProduct(state, p) {
     state.product = p.product;
+    console.log('state');
+    console.log(state);
   },
   updateProduct: function updateProduct(state) {}
 };

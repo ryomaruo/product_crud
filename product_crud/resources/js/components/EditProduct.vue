@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="create-product">
-      {{ $route.params }}
+      {{ product }}
     </div>
   </div>
 </template>
@@ -11,11 +11,13 @@
 
   export default {
     computed: {
-      ...mapState('products', ['editingProduct'])
+      ...mapState('product', ['product', 'maxLength'])
     },
     methods: {
+      ...mapActions('product', ['initEditingProduct'])
     },
     created() {
+      this.initEditingProduct(this.$route.params.id)
     }
   }
 </script>

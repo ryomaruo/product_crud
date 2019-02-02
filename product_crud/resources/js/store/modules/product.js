@@ -16,7 +16,7 @@ const actions = {
   },
   initEditingProduct: ({ commit , state, rootState }, id) => {
     commit('setProduct', {
-      product: rootState.products.products.find(item => item.id === id)
+      product: rootState.products.products.find(item => item.id == id)
     })
   },
 }
@@ -34,6 +34,9 @@ const mutations = {
   },
   setProduct: (state, p) => {
     state.product = p.product
+    console.log('state');
+    console.log(state);
+    
   },
   updateProduct: (state) => {
 

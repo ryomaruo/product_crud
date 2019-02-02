@@ -97,6 +97,9 @@
           'has-error': (this.validation[key] == false)
         }
       }
+    },
+    created() {
+      this.initProduct()
     }
   }
 </script>
