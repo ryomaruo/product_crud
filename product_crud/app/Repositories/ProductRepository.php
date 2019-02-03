@@ -13,16 +13,16 @@ class ProductRepository implements CrudRepositoryInterface
     }
 
     // create a new record in the database
-    public function create(Request $request)
+    public function create(array $data)
     {
         $product = new Product;
-        $product->name = $request->name;
-        $product->model_number = $request->model_number;
-        $product->price = $request->price;
-        $product->stock = $request->stock;
-        $product->discontinued = $request->discontinued;
-        $product->description = $request->description;
-        $product->image_url = $request->image_url;
+        $product->name = $data['name'];
+        $product->model_number = $data['model_number'];
+        $product->price = $data['price'];
+        $product->stock = $data['stock'];
+        $product->discontinued = $data['discontinued'];
+        $product->description = $data['description'];
+        $product->image_url = $data['image_url'];
         return $product->save();
     }
 
@@ -33,7 +33,7 @@ class ProductRepository implements CrudRepositoryInterface
     }
 
     // update record in the database
-    public function update(Request $request, $id)
+    public function update(array $data, $id)
     {
         $record = Product::find($id);
         return $record->update($data);

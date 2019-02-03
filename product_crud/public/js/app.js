@@ -11466,20 +11466,54 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])('product', ['setProduct']), Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('product', ['createProduct', 'updateProduct']), Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('products', ['addProduct']), {
-    onSubmit: function onSubmit() {
-      switch (this.page) {
-        case 'create':
-          this.createProduct(this.current);
-          this.addProduct();
-          break;
+    onSubmit: function () {
+      var _onSubmit = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.t0 = this.page;
+                _context.next = _context.t0 === 'create' ? 3 : _context.t0 === 'edit' ? 10 : 12;
+                break;
 
-        case 'edit':
-          this.updateProduct(this.current);
-          break;
+              case 3:
+                _context.next = 5;
+                return this.createProduct(this.current);
+
+              case 5:
+                _context.next = 7;
+                return this.addProduct();
+
+              case 7:
+                this.current = Object.assign({}, this.newProduct);
+                this.$router.push({
+                  path: '/products'
+                });
+                return _context.abrupt("break", 12);
+
+              case 10:
+                this.updateProduct(this.current);
+                return _context.abrupt("break", 12);
+
+              case 12:
+                return _context.abrupt("return", false);
+
+              case 13:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function onSubmit() {
+        return _onSubmit.apply(this, arguments);
       }
 
-      return false;
-    },
+      return onSubmit;
+    }(),
     errorClassObj: function errorClassObj(key) {
       return {
         'has-error': this.validation[key] == false
@@ -11488,33 +11522,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     init: function () {
       var _init = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context.t0 = this.page;
-                _context.next = _context.t0 === 'create' ? 3 : _context.t0 === 'edit' ? 5 : 9;
+                _context2.t0 = this.page;
+                _context2.next = _context2.t0 === 'create' ? 3 : _context2.t0 === 'edit' ? 5 : 9;
                 break;
 
               case 3:
-                this.current = this.newProduct;
-                return _context.abrupt("break", 9);
+                this.current = Object.assign({}, this.newProduct);
+                return _context2.abrupt("break", 9);
 
               case 5:
-                _context.next = 7;
+                _context2.next = 7;
                 return this.editingProduct(this.$route.params.id);
 
               case 7:
-                this.current = _context.sent;
-                return _context.abrupt("break", 9);
+                this.current = _context2.sent;
+                return _context2.abrupt("break", 9);
 
               case 9:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this);
+        }, _callee2, this);
       }));
 
       function init() {
@@ -49542,85 +49576,141 @@ function () {
   };
 }();
 
-var updateProduct =
+var createProduct =
 /*#__PURE__*/
 function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(product) {
-    var res;
+    var data, res;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.prev = 0;
-            _context3.next = 3;
-            return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put('http://localhost:8080/api/products/' + product.id, product);
+            data = {
+              name: product.name,
+              model_number: product.model_number,
+              price: product.price,
+              stock: product.stock,
+              discontinued: product.discontinued,
+              description: product.description
+            };
+            _context3.next = 4;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://localhost:8080/api/products', data);
 
-          case 3:
+          case 4:
             res = _context3.sent;
             return _context3.abrupt("return", res.data);
 
-          case 7:
-            _context3.prev = 7;
+          case 8:
+            _context3.prev = 8;
             _context3.t0 = _context3["catch"](0);
             console.log(_context3.t0);
             return _context3.abrupt("return", []);
 
-          case 11:
+          case 12:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, this, [[0, 7]]);
+    }, _callee3, this, [[0, 8]]);
   }));
 
-  return function updateProduct(_x2) {
+  return function createProduct(_x2) {
     return _ref3.apply(this, arguments);
+  };
+}();
+
+var updateProduct =
+/*#__PURE__*/
+function () {
+  var _ref4 = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(product) {
+    var data, res;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            data = {
+              name: product.name,
+              model_number: product.model_number,
+              price: product.price,
+              stock: product.stock,
+              discontinued: product.discontinued,
+              description: product.description,
+              image_url: 'https://i.gyazo.com/57fc7fb20cc0e5669526f8524e56a5b1.jpg'
+            };
+            _context4.next = 4;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put('http://localhost:8080/api/products/' + product.id, data);
+
+          case 4:
+            res = _context4.sent;
+            return _context4.abrupt("return", res.data);
+
+          case 8:
+            _context4.prev = 8;
+            _context4.t0 = _context4["catch"](0);
+            console.log(_context4.t0);
+            return _context4.abrupt("return", []);
+
+          case 12:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, this, [[0, 8]]);
+  }));
+
+  return function updateProduct(_x3) {
+    return _ref4.apply(this, arguments);
   };
 }();
 
 var deleteProducts =
 /*#__PURE__*/
 function () {
-  var _ref4 = _asyncToGenerator(
+  var _ref5 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(id, products) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(id, products) {
     var res;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context5.prev = _context5.next) {
           case 0:
-            _context4.prev = 0;
-            _context4.next = 3;
+            _context5.prev = 0;
+            _context5.next = 3;
             return axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete('http://localhost:8080/api/products/' + id);
 
           case 3:
-            res = _context4.sent;
-            return _context4.abrupt("return", res.data);
+            res = _context5.sent;
+            return _context5.abrupt("return", res.data);
 
           case 7:
-            _context4.prev = 7;
-            _context4.t0 = _context4["catch"](0);
-            console.log(_context4.t0);
-            return _context4.abrupt("return", products);
+            _context5.prev = 7;
+            _context5.t0 = _context5["catch"](0);
+            console.log(_context5.t0);
+            return _context5.abrupt("return", products);
 
           case 11:
           case "end":
-            return _context4.stop();
+            return _context5.stop();
         }
       }
-    }, _callee4, this, [[0, 7]]);
+    }, _callee5, this, [[0, 7]]);
   }));
 
-  return function deleteProducts(_x3, _x4) {
-    return _ref4.apply(this, arguments);
+  return function deleteProducts(_x4, _x5) {
+    return _ref5.apply(this, arguments);
   };
 }();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   fetchProducts: fetchProducts,
   fetchProduct: fetchProduct,
+  createProduct: createProduct,
   updateProduct: updateProduct,
   deleteProducts: deleteProducts
 });
@@ -50494,13 +50584,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _api_shop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api/shop */ "./resources/js/api/shop.js");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../router */ "./resources/js/router.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 
 
 var state = {
@@ -50566,42 +50654,27 @@ var getters = {
   }
 };
 var actions = {
-  createProduct: function createProduct(_ref2, product) {
-    var commit = _ref2.commit,
-        state = _ref2.state;
-    commit('setProduct', {
-      product: product
-    });
-  },
-  updateProduct: function () {
-    var _updateProduct = _asyncToGenerator(
+  createProduct: function () {
+    var _createProduct = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref3, product) {
-      var commit, state, products;
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref2, product) {
+      var commit, state;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              commit = _ref3.commit, state = _ref3.state;
-              _context2.next = 3;
-              return _api_shop__WEBPACK_IMPORTED_MODULE_1__["default"].updateProduct(product);
+              commit = _ref2.commit, state = _ref2.state;
+              // dummy image追加
+              product.image_url = 'https://i.gyazo.com/57fc7fb20cc0e5669526f8524e56a5b1.jpg';
+              _context2.next = 4;
+              return _api_shop__WEBPACK_IMPORTED_MODULE_1__["default"].createProduct(product);
 
-            case 3:
-              _context2.next = 5;
-              return _api_shop__WEBPACK_IMPORTED_MODULE_1__["default"].fetchProducts();
+            case 4:
+              commit('setProduct', {
+                product: product
+              });
 
             case 5:
-              products = _context2.sent;
-              commit('products/setProducts', {
-                products: products
-              }, {
-                root: true
-              });
-              _router__WEBPACK_IMPORTED_MODULE_2__["default"].push({
-                path: '/products'
-              });
-
-            case 8:
             case "end":
               return _context2.stop();
           }
@@ -50609,7 +50682,45 @@ var actions = {
       }, _callee2, this);
     }));
 
-    function updateProduct(_x2, _x3) {
+    function createProduct(_x2, _x3) {
+      return _createProduct.apply(this, arguments);
+    }
+
+    return createProduct;
+  }(),
+  updateProduct: function () {
+    var _updateProduct = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(_ref3, product) {
+      var commit, state, products;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              commit = _ref3.commit, state = _ref3.state;
+              _context3.next = 3;
+              return _api_shop__WEBPACK_IMPORTED_MODULE_1__["default"].updateProduct(product);
+
+            case 3:
+              products = _context3.sent;
+              commit('products/setProducts', {
+                products: products
+              }, {
+                root: true
+              });
+              router.push({
+                path: '/products'
+              });
+
+            case 6:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, this);
+    }));
+
+    function updateProduct(_x4, _x5) {
       return _updateProduct.apply(this, arguments);
     }
 
@@ -50619,8 +50730,6 @@ var actions = {
 var mutations = {
   setProduct: function setProduct(state, p) {
     state.product = p.product;
-    console.log('state');
-    console.log(state);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -50645,11 +50754,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _api_shop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api/shop */ "./resources/js/api/shop.js");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../router */ "./resources/js/router.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
  // initial state
 
@@ -50675,22 +50786,31 @@ var actions = {
     var _initProducts = _asyncToGenerator(
     /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
-      var commit, products;
+      var commit, state, products;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              commit = _ref.commit;
-              _context.next = 3;
-              return _api_shop__WEBPACK_IMPORTED_MODULE_1__["default"].fetchProducts();
+              commit = _ref.commit, state = _ref.state;
+
+              if (!(state.products.length > 0)) {
+                _context.next = 3;
+                break;
+              }
+
+              return _context.abrupt("return", true);
 
             case 3:
+              _context.next = 5;
+              return _api_shop__WEBPACK_IMPORTED_MODULE_1__["default"].fetchProducts();
+
+            case 5:
               products = _context.sent;
               commit('setProducts', {
                 products: products
               });
 
-            case 5:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -50704,36 +50824,21 @@ var actions = {
 
     return initProducts;
   }(),
-  addProduct: function addProduct(_ref2) {
-    var commit = _ref2.commit,
-        state = _ref2.state,
-        rootState = _ref2.rootState;
-    commit('addProduct', {
-      product: rootState.product.product
-    });
-  },
-  deleteProduct: function () {
-    var _deleteProduct = _asyncToGenerator(
+  addProduct: function () {
+    var _addProduct = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref3, index) {
-      var commit, state, id, products;
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref2) {
+      var commit, state, rootState;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              commit = _ref3.commit, state = _ref3.state;
-              // TODO: isLoading追加
-              id = state.products[index].id;
-              _context2.next = 4;
-              return _api_shop__WEBPACK_IMPORTED_MODULE_1__["default"].deleteProducts(id, state.products);
-
-            case 4:
-              products = _context2.sent;
-              commit('setProducts', {
-                products: products
+              commit = _ref2.commit, state = _ref2.state, rootState = _ref2.rootState;
+              commit('addProduct', {
+                product: rootState.product.product
               });
 
-            case 6:
+            case 2:
             case "end":
               return _context2.stop();
           }
@@ -50741,7 +50846,47 @@ var actions = {
       }, _callee2, this);
     }));
 
-    function deleteProduct(_x2, _x3) {
+    function addProduct(_x2) {
+      return _addProduct.apply(this, arguments);
+    }
+
+    return addProduct;
+  }(),
+  deleteProduct: function () {
+    var _deleteProduct = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(_ref3, index) {
+      var commit, state, id, products;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              commit = _ref3.commit, state = _ref3.state;
+              // TODO: isLoading追加
+              id = state.products[index].id; // TODO: deleteの405エラーが解消したらproductsが返ってくるので、products取得し直す必要ない。
+
+              _context3.next = 4;
+              return _api_shop__WEBPACK_IMPORTED_MODULE_1__["default"].deleteProducts(id, state.products);
+
+            case 4:
+              _context3.next = 6;
+              return _api_shop__WEBPACK_IMPORTED_MODULE_1__["default"].fetchProducts();
+
+            case 6:
+              products = _context3.sent;
+              commit('setProducts', {
+                products: products
+              });
+
+            case 8:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, this);
+    }));
+
+    function deleteProduct(_x3, _x4) {
       return _deleteProduct.apply(this, arguments);
     }
 
@@ -50752,9 +50897,9 @@ var actions = {
     commit('updateInvalidImg', {
       index: i
     });
-  } // mutations
+  }
+}; // mutations
 
-};
 var mutations = {
   setProducts: function setProducts(state, p) {
     state.products = p.products;

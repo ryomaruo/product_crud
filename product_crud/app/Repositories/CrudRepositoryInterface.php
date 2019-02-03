@@ -7,9 +7,9 @@ interface CrudRepositoryInterface
 
     public function fetch($id);
 
-    public function create(Request $request);
+    public function create(array $data);
 
-    public function update(Request $request, $id);
+    public function update(array $data, $id);
 
     public function delete($id);
 }

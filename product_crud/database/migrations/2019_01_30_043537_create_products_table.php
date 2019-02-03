@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->integer('price')->default(0);
             $table->integer('stock')->default(0);
             $table->boolean('discontinued');
-            $table->text('description');
-            $table->string('image_url');
+            $table->text('description')->nullable();
+            $table->string('image_url')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -86,11 +86,15 @@ export default {
     ...mapMutations('product', ['setProduct']),
     ...mapActions('product', ['createProduct', 'updateProduct']),
     ...mapActions('products', ['addProduct']),
-    onSubmit() {
+    async onSubmit() {
       switch (this.page) {
         case 'create':
-          this.createProduct(this.current)
-          this.addProduct()
+          await this.createProduct(this.current)
+          await this.addProduct()
+          this.current = Object.assign({}, this.newProduct)
+          this.$router.push({
+            path: '/products'
+          })
           break;
         case 'edit':
           this.updateProduct(this.current)
@@ -107,7 +111,7 @@ export default {
     async init () {
       switch (this.page) {
         case 'create':
-          this.current = this.newProduct
+          this.current = Object.assign({}, this.newProduct)
           break;
         case 'edit':
           this.current = await this.editingProduct(this.$route.params.id)

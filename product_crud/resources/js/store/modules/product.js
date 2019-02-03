@@ -1,5 +1,4 @@
 import shop from '../../api/shop'
-import router from '../../router'
 
 const state = {
   product: {},
@@ -32,15 +31,16 @@ const getters = {
 }
 
 const actions = {
-  createProduct: ({ commit , state }, product) => {
+  createProduct: async ({ commit , state }, product) => {
+    // dummy image追加
+    product.image_url = 'https://i.gyazo.com/57fc7fb20cc0e5669526f8524e56a5b1.jpg'
+    await shop.createProduct(product)
     commit('setProduct', {
       product: product
     })
   },
   updateProduct: async ({ commit , state }, product) => {
-    await shop.updateProduct(product)
-    // TODO: 405エラーが解決するまでいったんfetchProductsでリスト取得。解決したら削除。
-    const products = await shop.fetchProducts()
+    const products = await shop.updateProduct(product)
     commit('products/setProducts', {
       products: products
     },
@@ -56,8 +56,6 @@ const actions = {
 const mutations = {
   setProduct: (state, p) => {
     state.product = p.product
-    console.log('state');
-    console.log(state);
   }
 }
 

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Request;
 use App\Services\ProductServiceInterface;
 use App\Repositories\ProductRepository;
 use Illuminate\Validation\Factory as ValidateFactory;
@@ -67,15 +68,16 @@ class ProductService implements ProductServiceInterface
      */
     public function save(Request $request, $id=null)
     {
-        $validation = $this->validateFactory->make($input, $this->rules);
+        $data = $request->all();
+        $validation = $this->validateFactory->make($data, $this->rules);
         if ($validation->fails()) {
             return null;
         }
 
         if (is_null($id)) {
-            $id = $this->ProductRepository->create($request);
+            $id = $this->ProductRepository->create($data);
         } else {
-            $id = $this->ProductRepository->update($id, $request);
+            $id = $this->ProductRepository->update($data, $id);
         }
 
         return $id;

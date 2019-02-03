@@ -1,4 +1,5 @@
 import shop from '../../api/shop'
+import router from '../../router'
 
 // initial state
 const state = {
@@ -19,13 +20,16 @@ const getters = {
 // actions
 const actions = {
   // TODO: isLoading追加
-  async initProducts({ commit }) {
+  async initProducts({ commit , state }) {
+    if (state.products.length > 0) {
+      return true;
+    }
     const products = await shop.fetchProducts()
     commit('setProducts', {
       products: products
     })
   },
-  addProduct: ({ commit , state , rootState }) => {
+  async addProduct ({ commit , state , rootState }) {
     commit('addProduct', {
       product: rootState.product.product
     })
@@ -33,12 +37,14 @@ const actions = {
   async deleteProduct({ commit , state }, index) {
     // TODO: isLoading追加
     const id = state.products[index].id
-    const products = await shop.deleteProducts(id, state.products)
+    // TODO: deleteの405エラーが解消したらproductsが返ってくるので、products取得し直す必要ない。
+    await shop.deleteProducts(id, state.products)
+    const products = await shop.fetchProducts()
     commit('setProducts', {
       products: products
     })
   },
-  imageUrlAlt: ({ commit }, i) => {
+  imageUrlAlt ({ commit }, i) {
     commit('updateInvalidImg', {
       index: i
     })
