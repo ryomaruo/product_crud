@@ -4,9 +4,20 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Http\Controllers\Controller;
+use App\Services\ProductServiceInterface;
 
 class ProductController extends Controller
 {
+    private $productService;
+
+    /**
+     * @param productServiceInterface $productServiceInterface
+     */
+    public function __construct(ProductServiceInterface $productServiceInterface)
+    {
+        $this->productService = $productServiceInterface;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +25,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::All();
-        return $products;
+        return $this->productService->fetchList();
     }
 
     /**
@@ -26,15 +36,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-      $product = new Product;
-      $product->name = $request->name;
-      $product->model_number = $request->model_number;
-      $product->price = $request->price;
-      $product->stock = $request->stock;
-      $product->discontinued = $request->discontinued;
-      $product->description = $request->description;
-      $product->image_url = $request->image_url;
-      $product->save();
+      $this->productService->save($request);
       return redirect('api/products');
     }
 
@@ -46,8 +48,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
-        return $product;
+        return Product::find($id);
     }
 
     /**
@@ -59,15 +60,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $product = Product::find($id);
-      $product->name = $request->name;
-      $product->model_number = $request->model_number;
-      $product->price = $request->price;
-      $product->stock = $request->stock;
-      $product->discontinued = $request->discontinued;
-      $product->description = $request->description;
-      $product->image_url = $request->image_url;
-      $product->save();
+      $this->productService->save($request, $id);
       return redirect("api/products");
     }
 
