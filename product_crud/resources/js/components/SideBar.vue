@@ -22,10 +22,15 @@
         return false;
       },
       createBtnPath() {
-        return (this.$route.path == '/products/create')? '/products':'/products/create'
+        return (this.isBtnToList())? '/products':'/products/create'
       },
       createBtnTitle() {
-        return (this.$route.path == '/products/create')? '一覧に戻る':'新規登録'
+        return (this.isBtnToList())? '一覧に戻る':'新規登録'
+      }
+    },
+    methods: {
+      isBtnToList() {
+        return (this.$route.path == '/products/create' || this.$route.matched.some(record => record.path == '/products/edit/:id'))
       }
     }
   }

@@ -35,7 +35,6 @@ const updateProduct = async (product) => {
 const deleteProducts = async (id, products) => {
   try {
     const res = await axios.delete('http://localhost:8080/api/products/' + id)
-    
     return res.data;
   } catch (error) {
     console.log(error);

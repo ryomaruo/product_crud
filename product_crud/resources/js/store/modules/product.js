@@ -1,4 +1,5 @@
 import shop from '../../api/shop'
+import router from '../../router'
 
 const state = {
   product: {},
@@ -37,13 +38,17 @@ const actions = {
     })
   },
   updateProduct: async ({ commit , state }, product) => {
-    const products = await shop.updateProduct(product)
-    
+    await shop.updateProduct(product)
+    // TODO: 405エラーが解決するまでいったんfetchProductsでリスト取得。解決したら削除。
+    const products = await shop.fetchProducts()
     commit('products/setProducts', {
       products: products
     },
     {
       root: true
+    })
+    router.push({
+      path: '/products'
     })
   }
 }

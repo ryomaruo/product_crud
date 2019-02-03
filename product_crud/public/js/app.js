@@ -11667,10 +11667,17 @@ __webpack_require__.r(__webpack_exports__);
       return false;
     },
     createBtnPath: function createBtnPath() {
-      return this.$route.path == '/products/create' ? '/products' : '/products/create';
+      return this.isBtnToList() ? '/products' : '/products/create';
     },
     createBtnTitle: function createBtnTitle() {
-      return this.$route.path == '/products/create' ? '一覧に戻る' : '新規登録';
+      return this.isBtnToList() ? '一覧に戻る' : '新規登録';
+    }
+  },
+  methods: {
+    isBtnToList: function isBtnToList() {
+      return this.$route.path == '/products/create' || this.$route.matched.some(function (record) {
+        return record.path == '/products/edit/:id';
+      });
     }
   }
 });
@@ -27661,7 +27668,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".product-box[data-v-438ffe92] {\n  width: 350px;\n  height: 250px;\n  margin: 40px 0;\n  border: solid 1px #fff;\n  box-shadow: 0 0 10px #fff;\n  position: relative;\n}\n.product-box .image-area[data-v-438ffe92] {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.product-box .image-area[data-v-438ffe92]:hover {\n  cursor: pointer;\n}\n.product-box .image-area img[data-v-438ffe92] {\n  width: 100%;\n  height: 100%;\n}\n.product-box .image-area .btn-area[data-v-438ffe92] {\n  padding: 5px;\n  position: absolute;\n  top: 0;\n  right: 0;\n  z-index: 1;\n}\n.product-box .image-area .btn-area .btn[data-v-438ffe92] {\n  border-radius: 20px !important;\n}\n.product-box .info-area[data-v-438ffe92] {\n  padding: 5px;\n  background: #000;\n  opacity: 0.6;\n  position: absolute;\n  bottom: 0;\n  right: 0;\n}\n.no-item[data-v-438ffe92] {\n  padding-top: 20px;\n}", ""]);
+exports.push([module.i, ".product-box[data-v-438ffe92] {\n  width: 350px;\n  height: 250px;\n  margin: 40px 0;\n  border: solid 1px #fff;\n  box-shadow: 0 0 10px #fff;\n  position: relative;\n}\n.product-box .image-area[data-v-438ffe92] {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.product-box .image-area[data-v-438ffe92]:hover {\n  cursor: pointer;\n}\n.product-box .image-area img[data-v-438ffe92] {\n  width: 100%;\n  height: 100%;\n}\n.product-box .image-area .btn-area[data-v-438ffe92] {\n  padding: 5px;\n  position: absolute;\n  top: 0;\n  right: 0;\n  z-index: 1;\n}\n.product-box .image-area .btn-area .btn[data-v-438ffe92] {\n  border-radius: 20px !important;\n}\n.product-box .info-area[data-v-438ffe92] {\n  padding: 5px;\n  background: #000;\n  opacity: 0.6;\n  position: absolute;\n  bottom: 0;\n  right: 0;\n}\n.product-box .info-area p[data-v-438ffe92] {\n  margin-bottom: 0;\n}\n.no-item[data-v-438ffe92] {\n  padding-top: 20px;\n}", ""]);
 
 // exports
 
@@ -50487,11 +50494,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _api_shop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api/shop */ "./resources/js/api/shop.js");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../router */ "./resources/js/router.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 var state = {
@@ -50578,14 +50587,21 @@ var actions = {
               return _api_shop__WEBPACK_IMPORTED_MODULE_1__["default"].updateProduct(product);
 
             case 3:
+              _context2.next = 5;
+              return _api_shop__WEBPACK_IMPORTED_MODULE_1__["default"].fetchProducts();
+
+            case 5:
               products = _context2.sent;
               commit('products/setProducts', {
                 products: products
               }, {
                 root: true
               });
+              _router__WEBPACK_IMPORTED_MODULE_2__["default"].push({
+                path: '/products'
+              });
 
-            case 5:
+            case 8:
             case "end":
               return _context2.stop();
           }
