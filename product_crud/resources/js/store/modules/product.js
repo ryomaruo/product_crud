@@ -36,9 +36,12 @@ const actions = {
   createProduct: async ({ commit , state }, product) => {
     // dummy image追加
     product.image_url = 'https://i.gyazo.com/57fc7fb20cc0e5669526f8524e56a5b1.jpg'
-    const res = await shop.createProduct(product)
-    commit('setProduct', {
-      product: product
+    const products = await shop.createProduct(product)    
+    commit('products/setProducts', {
+      products: products
+    },
+    {
+      root: true
     })
   },
   updateProduct: async ({ commit , state }, product) => {
@@ -56,9 +59,6 @@ const actions = {
 }
 
 const mutations = {
-  setProduct: (state, p) => {
-    state.product = p.product
-  },
   toggleSubmitting: (state, p) => {
     state.isSubmitting = p.bool
   }

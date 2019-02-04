@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::group([
-  'middleware' => ['api', 'cors'],
+  'middleware' => ['api'],
 ], function(){
   Route::resource('products', 'Api\ProductController');
 });

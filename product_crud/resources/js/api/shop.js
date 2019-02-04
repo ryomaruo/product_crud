@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-//const API_URL = 'product-crud-0203.herokuapp.com'
-const API_URL = 'localhost:8080'
+const API_URL = 'https://product-crud-0203.herokuapp.com'
+//const API_URL = 'http://localhost:8080'
 
 const fetchProducts = async () => {
   try {
-    const res = await axios.get('http://' + API_URL +'/api/products')
+    const res = await axios.get(API_URL +'/api/products')
     const products = res.data
     
     return products
@@ -17,7 +17,7 @@ const fetchProducts = async () => {
 
 const fetchProduct = async (id) => {
   try {
-    const res = await axios.get('http://' + API_URL +'/api/products/' + id)
+    const res = await axios.get(API_URL +'/api/products/' + id)
     const product = res.data
     return product
   } catch (error) {
@@ -34,10 +34,11 @@ const createProduct = async (product) => {
       price: product.price,
       stock: product.stock,
       discontinued: product.discontinued,
-      description: product.description
+      description: product.description,
+      image_url: 'https://i.gyazo.com/57fc7fb20cc0e5669526f8524e56a5b1.jpg',
     }
-    
-    await axios.post('http://' + API_URL +'/api/products', data)
+    const res = await axios.post(API_URL +'/api/products', data)
+    return res.data
   } catch (error) {
     console.log(error);
     alert('登録に失敗しました。リロードしてください。')
@@ -56,7 +57,7 @@ const updateProduct = async (product) => {
       description: product.description,
       image_url: 'https://i.gyazo.com/57fc7fb20cc0e5669526f8524e56a5b1.jpg',
     }
-    const res = await axios.put('http://' + API_URL +'/api/products/' + product.id, data)
+    const res = await axios.put(API_URL +'/api/products/' + product.id, data)
     return res.data
   } catch (error) {
     console.log(error);
@@ -67,7 +68,7 @@ const updateProduct = async (product) => {
 
 const deleteProducts = async (id, products) => {
   try {
-    const res = await axios.delete('http://' + API_URL +'/api/products/' + id)
+    const res = await axios.delete(API_URL +'/api/products/' + id)
     return res.data;
   } catch (error) {
     console.log(error);

@@ -28,17 +28,12 @@ const actions = {
       products: products
     })
   },
-  async addProduct ({ commit , state , rootState }) {
-    commit('addProduct', {
-      product: rootState.product.product
-    })
-  },
   async deleteProduct({ commit , state }, index) {
     const id = state.products[index].id
     // TODO: deleteの405エラーが解消したらproductsが返ってくるので、products取得し直す必要ない。
-    await shop.deleteProducts(id, state.products)
-    alert(state.products[id].name + 'を削除しました。')
-    const products = await shop.fetchProducts()
+    const products = await shop.deleteProducts(id, state.products)
+    alert(state.products[index].name + 'を削除しました。')
+//    const products = await shop.fetchProducts()
     commit('setProducts', {
       products: products
     })
@@ -55,9 +50,6 @@ const mutations = {
   setProducts: (state, p) => {
     state.products = p.products
     
-  },
-  addProduct: (state, p) => {
-    state.products.push(p.product)
   },
   updateInvalidImg: (state, p) => {
     state.products[p.index].image_url = state.altImage

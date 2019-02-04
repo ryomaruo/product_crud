@@ -25,7 +25,11 @@
               :src="product.image_url"
               @error="imageUrlAlt(i)" />
             <div class="info-area">
-              <p>{{ product.name }} : {{ product.price }}円</p>
+              <p><span class="info-title">商品名:</span>{{ product.name }}</p>
+              <p><span class="info-title">型番:</span>{{ product.model_number }}</p>
+              <p><span class="info-title">価格:</span>{{ product.price }}円</p>
+              <p><span class="info-title">在庫:</span>{{ product.stock }}個</p>
+              <p><span class="info-title">商品説明:</span>{{ product.description }}</p>
             </div>
           </router-link>
         </div>
@@ -111,14 +115,23 @@ export default {
       }
     }
     .info-area {
+      height: 100%;
+      width: 100%;
       padding: 5px;
       background: #000;
       opacity: 0.6;
+      overflow: scroll;
       position: absolute;
       bottom: 0;
       right: 0;
       p {
+        padding-right: 40px;
         margin-bottom: 0;
+        word-wrap: break-word;
+      }
+      .info-title {
+        width: 80px;
+        display: inline-block;
       }
     }
   }

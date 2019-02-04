@@ -170,7 +170,6 @@ export default {
   methods: {
     ...mapMutations('product', ['toggleSubmitting']),
     ...mapActions('product', ['createProduct', 'updateProduct']),
-    ...mapActions('products', ['addProduct']),
     async onSubmit() {
       this.toggleSubmitting({
         bool: true
@@ -178,8 +177,6 @@ export default {
       switch (this.page) {
         case 'create':
           const res = await this.createProduct(this.current)
-
-          await this.addProduct()
           this.current = Object.assign({}, this.newProduct)
           this.$router.push({
             path: '/products'

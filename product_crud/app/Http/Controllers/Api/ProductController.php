@@ -37,7 +37,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
       $this->productService->save($request);
-      return redirect('api/products');
+      return $this->productService->fetchList();
     }
 
     /**
@@ -61,7 +61,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
       $this->productService->save($request, $id);
-      return redirect("api/products");
+      return $this->productService->fetchList();
     }
 
     /**
@@ -74,6 +74,6 @@ class ProductController extends Controller
     {
       $product = Product::find($id);
       $product->delete();
-      return redirect('api/products');
+      return $this->productService->fetchList();
     }
 }
