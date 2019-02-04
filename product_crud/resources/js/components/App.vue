@@ -1,13 +1,17 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" :style="{ height: wrapperHeight }">
     <RouterView />
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
+  computed: {
+    ...mapState('products', ['products']),
+    ...mapGetters(['wrapperHeight'])
+  },
   methods: {
     ...mapActions('products', [
       'initProducts'

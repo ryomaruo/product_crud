@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div v-if="isLoading" class="loading">
+    <Loading></Loading>
+  </div>
+  <div v-else>
     <div v-if="isExistProducts" class="row">
       <div
         v-for="product, i in products"
@@ -32,34 +35,42 @@
     <div v-else class="col-12 text-center no-item">
       No Items
     </div>
-    
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import BasicModal from './BasicModal.vue'
+import Loading from './Loading.vue'
 
 export default {
   components: {
-    BasicModal
+    BasicModal,
+    Loading
   },
   computed: {
-    ...mapState("products", ["products"]),
+    ...mapState(['isLoading']),
+    ...mapState('products', ['products']),
     ...mapGetters("products", ['isExistProducts'])
   },
   methods: {
+    ...mapMutations(['toggleLoading']),
     ...mapActions('products', [
       'initProducts',
       'imageUrlAlt'
     ]),
     ...mapActions('modal', ['onClickDelete']),
   },
-  created () {
-    this.initProducts()
-  },
-  mounted() {
-  },
+  async created () {
+    this.toggleLoading({
+      bool: true
+    })
+    
+    await this.initProducts()
+    this.toggleLoading({
+      bool: false
+    })
+  }
 }
 </script>
 
@@ -87,10 +98,12 @@ export default {
         height: 100%;
       }
       .btn-area {
+        width: 35px;
+        height: 35px;
         padding: 5px;
         position: absolute;
         top: 0;
-        right: 0;
+        right: 10px;
         z-index: 1;
         .btn {
           border-radius: 20px !important;

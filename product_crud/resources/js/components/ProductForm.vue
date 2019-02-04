@@ -66,7 +66,7 @@
       </label>
     </div>
 
-    <div :class="errorClassObj('price')">
+    <div>
       <label class="block-label">
         <p class="label-txt">商品説明</p>
         <input type="text" v-model="current.description" class="input">

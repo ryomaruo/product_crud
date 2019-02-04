@@ -1,6 +1,6 @@
 <template>
-  <div class="main">
-    <div class="container">
+  <div class="main" :style="{ height: wrapperHeight }">
+    <div class="container" :style="{ height: wrapperHeight }">
       <div class="row">
         <div class="col-10 main-container">
           <RouterView />
@@ -14,25 +14,29 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import SideBar from './SideBar.vue'
 
 export default {
   components: {
     SideBar
+  },
+  computed: {
+    ...mapGetters(['wrapperHeight'])
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .row {
-    height: 150%;
-    width: 100%;
-  }
   .container {
     position: relative;
   }
   .main-container {
     height: 100%;
     padding: 50px 0;
+  }
+  .row {
+    height: 100%;
+    width: 100%;
   }
 </style>

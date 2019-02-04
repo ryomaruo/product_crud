@@ -1,10 +1,10 @@
 import shop from '../../api/shop'
-import router from '../../router'
 
 // initial state
 const state = {
   products: [],
-  altImage: 'https://i.gyazo.com/0ba231479a5db2b2664fc81e184f2591.png'
+  altImage: 'https://i.gyazo.com/0ba231479a5db2b2664fc81e184f2591.png',
+  isLoading: false
 }
 
 // getters
@@ -19,7 +19,6 @@ const getters = {
 
 // actions
 const actions = {
-  // TODO: isLoading追加
   async initProducts({ commit , state }) {
     if (state.products.length > 0) {
       return true;
@@ -35,10 +34,10 @@ const actions = {
     })
   },
   async deleteProduct({ commit , state }, index) {
-    // TODO: isLoading追加
     const id = state.products[index].id
     // TODO: deleteの405エラーが解消したらproductsが返ってくるので、products取得し直す必要ない。
     await shop.deleteProducts(id, state.products)
+    alert(state.products[id].name + 'を削除しました。')
     const products = await shop.fetchProducts()
     commit('setProducts', {
       products: products
@@ -60,7 +59,7 @@ const mutations = {
   addProduct: (state, p) => {
     state.products.push(p.product)
   },
-  updateInvalidImg:  (state, p) => {
+  updateInvalidImg: (state, p) => {
     state.products[p.index].image_url = state.altImage
   }
 }

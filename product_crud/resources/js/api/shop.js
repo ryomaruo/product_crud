@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+//const API_URL = 'product-crud-0203.herokuapp.com'
 const API_URL = 'localhost:8080'
 
 const fetchProducts = async () => {
@@ -39,8 +40,8 @@ const createProduct = async (product) => {
     await axios.post('http://' + API_URL +'/api/products', data)
   } catch (error) {
     console.log(error);
-    alert('登録に失敗しました。')
-    throw new Error('終了します')
+    alert('登録に失敗しました。リロードしてください。')
+    throw new Error('登録に失敗しました。');
   }
 }
 
@@ -59,8 +60,8 @@ const updateProduct = async (product) => {
     return res.data
   } catch (error) {
     console.log(error);
-    alert('更新に失敗しました。')
-    throw new Error('exit')
+    alert('更新に失敗しました。リロードしてください。')
+    throw new Error('更新に失敗しました。');
   }
 };
 
