@@ -52,7 +52,7 @@ class ProductTest extends TestCase
         $response = $this->patch('/api/product/1', $data);
         $response->assertStatus(200);
         $response->assertJson($data);
-        $item = User::query()->find(1);
+        $item = Product::find(1);
         $this->assertSame('test_name_updated', $item->name);
     }
 
@@ -60,6 +60,6 @@ class ProductTest extends TestCase
     {
         $response = $this->delete('/api/product/1');
         $response->assertStatus(200);
-        $this->assertNull(User::find(1));
+        $this->assertNull(Product::find(1));
     }
 }
