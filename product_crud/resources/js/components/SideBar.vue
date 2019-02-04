@@ -43,10 +43,6 @@
     position: fixed;
     div {
       margin: 50px 0;
-      .btn {
-        font-size: 0.8rem;
-        box-shadow: 0 0 10px #fff;
-      }
     }
   }
 </style>

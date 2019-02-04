@@ -10569,5 +10569,9 @@ body {
   background-color: transparent !important;
 }
 
+.btn:not(:disabled):not(.disabled) {
+  box-shadow: 0 0 10px #fff !important;
+}
+
 /* ^ bootstrap btn customize */
 

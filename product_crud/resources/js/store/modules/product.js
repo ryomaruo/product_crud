@@ -1,11 +1,13 @@
 import shop from '../../api/shop'
+import router from '../../router'
 
 const state = {
   product: {},
   maxLength: {
     name: 32,
     model_number: 50
-  }
+  },
+  isSubmitting: false
 }
 
 const getters = {
@@ -13,8 +15,8 @@ const getters = {
     return {
       name: '',
       model_number: '',
-      price: 0,
-      stock: 0,
+      price: '0',
+      stock: '0',
       discontinued: 0,
       description: ''
     }
@@ -34,7 +36,7 @@ const actions = {
   createProduct: async ({ commit , state }, product) => {
     // dummy image追加
     product.image_url = 'https://i.gyazo.com/57fc7fb20cc0e5669526f8524e56a5b1.jpg'
-    await shop.createProduct(product)
+    const res = await shop.createProduct(product)
     commit('setProduct', {
       product: product
     })
@@ -56,6 +58,9 @@ const actions = {
 const mutations = {
   setProduct: (state, p) => {
     state.product = p.product
+  },
+  toggleSubmitting: (state, p) => {
+    state.isSubmitting = p.bool
   }
 }
 
